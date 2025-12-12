@@ -3,7 +3,7 @@ import axios from 'axios'
 import { FaRobot, FaSearch, FaCheckCircle, FaExclamationCircle, FaTrash } from 'react-icons/fa'
 import './App.css'
 
-const API_BASE_URL = "http://localhost:6543/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:6543/api";
 
 function App() {
   const [reviews, setReviews] = useState([]);
@@ -43,13 +43,12 @@ function App() {
     }
   };
 
-  
   const handleClear = async () => {
     if (!confirm("Yakin ingin menghapus semua riwayat analisis?")) return;
     
     try {
       await axios.post(`${API_BASE_URL}/clear-reviews`);
-      setReviews([]);
+      setReviews([]); 
     } catch (err) {
       alert("Gagal menghapus data.");
     }
@@ -65,14 +64,15 @@ function App() {
     <div className="app-container">
       <header className="app-header">
         <div className="header-content">
-          <h1> Product Review Analyzer</h1>
+          <h1><FaRobot /> Product Review Analyzer</h1>
+          <p>Powered by <strong>Hugging Face</strong> & <strong>Google Gemini</strong></p>
         </div>
       </header>
 
       <main className="main-content">
         <section className="input-section">
           <div className="form-card">
-            <h2> Analyze New Review</h2>
+            <h2>📝 Analyze New Review</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Product Name</label>
@@ -102,7 +102,7 @@ function App() {
                 {loading ? (
                   <span className="loading-text">⚙️ Analyzing...</span>
                 ) : (
-                  <>Analyze Sentiment & Extract Points</>
+                  <>🚀 Analyze Sentiment & Extract Points</>
                 )}
               </button>
             </form>
@@ -110,7 +110,6 @@ function App() {
         </section>
 
         <section className="results-section">
-          {/* HEADER DENGAN TOMBOL DELETE */}
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
             <h2>📊 Analysis History</h2>
             {reviews.length > 0 && (
