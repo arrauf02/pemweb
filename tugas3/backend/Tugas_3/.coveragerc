@@ -1,0 +1,3 @@
+[run]
+source = Tugas_3
+omit = Tugas_3/test*
