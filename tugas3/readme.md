@@ -37,8 +37,8 @@ A Pyramid-based web application that automatically analyzes product reviews. It 
 
 3.  **Install Dependencies:**
     ```bash
-    pip install -e .
-    pip install pyramid requests sqlalchemy zope.sqlalchemy
+    pip install -e . requests python-dotenv huggingface_hub google-generativeai psycopg2-binary
+    
     ```
 
 ## 🔑 Configuration (API Keys)
